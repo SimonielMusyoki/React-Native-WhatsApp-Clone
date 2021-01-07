@@ -1,5 +1,5 @@
-import { transform } from '@babel/core';
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 import * as React from 'react';
 import { FlatList,TouchableOpacity , Image, StyleSheet } from 'react-native';
 import FloatingActionButton from '../components/FloatingActionButton';
@@ -61,6 +61,11 @@ export default function ChatScreen() {
     )
   }
 
+  const navigation = useNavigation();
+
+  function onPress() {
+  }
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -70,7 +75,8 @@ export default function ChatScreen() {
         showsHorizontalScrollIndicator={false}
       />
       <View style={styles.buttons}>
-        <FloatingActionButton iconName="android-messages" extraStyle={styles.messageButton} />
+    
+        <FloatingActionButton iconName="android-messages" extraStyle={styles.messageButton} onPress={() =>navigation.navigate('Contacts', {}) }/>
       </View>
     </View>
   );

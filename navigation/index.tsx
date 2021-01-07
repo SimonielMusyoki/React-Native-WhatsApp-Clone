@@ -1,7 +1,12 @@
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { NavigationContainer, DefaultTheme, DarkTheme, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
 import { ColorSchemeName } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text } from 'react-native';
+import users from '../data/users';
+import ContactsScreen from '../screens/ContactsScreen';
 
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
@@ -24,11 +29,48 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 // Read more here: https://reactnavigation.org/docs/modal
 const Stack = createStackNavigator<RootStackParamList>();
 
+const renderHeaderLeft = () => {
+  const navigation = useNavigation();
+    return(
+      <View style={{ flexDirection: 'row'}}>
+        <TouchableOpacity 
+          style={{ margin: 10}}
+          onPress={()=> navigation.goBack() }
+        >
+          <Ionicons name="arrow-back" size={30} color="#fff" />
+        </TouchableOpacity>
+        <View style={{ marginLeft: 10, justifyContent: 'center'}}>
+          <Text style={{ color: '#fff', fontSize: 22, fontWeight: 'bold'}}>Select Contacts</Text>
+          <Text style={{ color: '#fff', fontSize: 15,}}>{users.length} contacts</Text>
+        </View>
+        
+      </View>
+    )
+  }
+
+  const renderHeaderRight = () => (
+    <View style={{ flexDirection: 'row'}}>
+      <Ionicons name="search" size={30} color="#fff" style={{ marginHorizontal: 5 }}/>
+      <MaterialCommunityIcons name="dots-vertical" size={30} color="#fff" style={{ marginHorizontal: 5 }}/>
+    </View>
+  )
+
+
+
 function RootNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
+    <Stack.Navigator >
+      <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }}/>
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      <Stack.Screen 
+        name="Contacts" 
+        component={ContactsScreen} 
+        options={{ 
+          title: '',
+          headerLeft: renderHeaderLeft,
+          headerRight:renderHeaderRight
+        }} 
+      />
     </Stack.Navigator>
   );
 }

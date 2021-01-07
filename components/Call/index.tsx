@@ -30,7 +30,7 @@ const Call = ({imageUri, name, callType,callTime}:CallProps) => {
                     <Text style={styles.title}>{name}</Text>
                     <View style={{ flexDirection: 'row', alignItems:'center'}}>
                         {renderCallIcon()}
-                        <Text style={{ fontSize: 19, opacity: 0.8}}> Yesterday, 9:34PM</Text>
+                        <Text style={{ fontSize: 19, opacity: 0.8}}> {callTime}</Text>
                     </View>
                 </View>
                 <TouchableOpacity>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     container: {
         width: Dimensions.get('window').width,
         flexDirection: 'row',
-        marginVertical: 10,
+        marginVertical: 12,
     },
     innerContainer:{
         flex: 1,
@@ -54,7 +54,10 @@ const styles = StyleSheet.create({
         marginRight: 20,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingBottom: 12,
+        borderBottomColor: 'rgba(255, 255, 255, 0.5)', 
+        borderWidth: 0.2,
     },
     title: {
         fontSize: 20,

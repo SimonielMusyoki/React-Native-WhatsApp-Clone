@@ -4,16 +4,17 @@ import { Image, TouchableOpacity } from 'react-native';
 
 export type ProfilePictureProps = {
     imageUri: string;
+    size?: number;
 }
 
-const ProfilePicture = ({imageUri}: ProfilePictureProps) => {
+const ProfilePicture = ({imageUri, size=60}: ProfilePictureProps) => {
     return (
         <Image 
                 source={{ uri: imageUri }}
                 style={{
-                    width: 60,
-                    height: 60,
-                    borderRadius: 35
+                    width: size,
+                    height: size,
+                    borderRadius: size * 0.5
                 }}
         />
     )
