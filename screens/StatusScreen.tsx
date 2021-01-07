@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { FlatList, Image, TouchableOpacity } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
+import FloatingActionButton from '../components/FloatingActionButton';
 import { Text, View } from '../components/Themed';
 import data from '../data/users'
 
@@ -77,11 +78,22 @@ export default function StatusScreen() {
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={renderHeader()}
       />
+      <View style={styles.buttons}>
+        <FloatingActionButton  iconName="pencil" extraStyle={styles.pencil}/>
+        <FloatingActionButton iconName="camera" extraStyle={styles.camera}/>
+
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  pencil: {
+    backgroundColor: 'rgba(26, 26, 0, 0.9)',
+  },
+  camera: {
+    backgroundColor: '#009999',
+  },
   container: {
     flex: 1,
     margin: 10
@@ -119,5 +131,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'teal', 
     justifyContent: 'center', 
     alignItems:'center'
+  },
+  buttons:{
+    position: 'absolute', 
+    bottom: 5, 
+    right: 5, 
   }
 });

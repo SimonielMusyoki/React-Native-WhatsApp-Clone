@@ -23,7 +23,7 @@ const Call = ({imageUri, name, callType,callTime}:CallProps) => {
         }
     }  
     return ( 
-        <View style={styles.container}>
+        <TouchableOpacity style={styles.container}>
             <ProfilePicture imageUri= {imageUri} />
             <View style={styles.innerContainer}>
                 <View>
@@ -33,10 +33,12 @@ const Call = ({imageUri, name, callType,callTime}:CallProps) => {
                         <Text style={{ fontSize: 19, opacity: 0.8}}> Yesterday, 9:34PM</Text>
                     </View>
                 </View>
-                <MaterialCommunityIcons name='phone' size={30} color="#009999" />
+                <TouchableOpacity>
+                    <MaterialCommunityIcons name='phone' size={30} color="#009999" />
+                </TouchableOpacity>
             </View>
             
-        </View>
+        </TouchableOpacity>
     )
 }
 

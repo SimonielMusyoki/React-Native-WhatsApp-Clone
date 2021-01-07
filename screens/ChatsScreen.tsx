@@ -2,9 +2,18 @@ import { transform } from '@babel/core';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import * as React from 'react';
 import { FlatList,TouchableOpacity , Image, StyleSheet } from 'react-native';
+import FloatingActionButton from '../components/FloatingActionButton';
 
 import { Text, View } from '../components/Themed';
-import chats from '../data/users'
+import chats from '../data/users';
+
+export type unreadBubbleProps = {
+  messagesCount: number;
+}
+
+export type renderItemProps = {
+  item: object;
+}
 
 export default function ChatScreen() {
 
@@ -12,13 +21,13 @@ export default function ChatScreen() {
     <Ionicons name='checkmark-done' size={20} color='#25B1E4' />
   )
 
-  const renderUnreadBubble = (messagesCount) => (
+  const renderUnreadBubble = (messagesCount:unreadBubbleProps) => (
     <View style={styles.messageBubble}>
      <Text>{messagesCount} </Text>
     </View>
   )
 
-  const renderItem = ({item}) => {
+  const renderItem = ({item}:renderItemProps) => {
     return(
       <TouchableOpacity style={{ flexDirection: 'row', marginHorizontal: 20,height: 70, justifyContent: 'center', alignItems: 'center' }}>
         <Image 
@@ -52,11 +61,6 @@ export default function ChatScreen() {
     )
   }
 
-  const renderFloatingActionButton = () => (
-    <TouchableOpacity style={styles.floatingBtn}>
-      <MaterialCommunityIcons name="android-messages" color="white" size={30} style={{ transform: [{ scaleX: -1}]}}/>
-    </TouchableOpacity>
-  )
   return (
     <View style={styles.container}>
       <FlatList
@@ -65,7 +69,9 @@ export default function ChatScreen() {
         renderItem={renderItem}
         showsHorizontalScrollIndicator={false}
       />
-      { renderFloatingActionButton() }
+      <View style={styles.buttons}>
+        <FloatingActionButton iconName="android-messages" extraStyle={styles.messageButton} />
+      </View>
     </View>
   );
 }
@@ -82,6 +88,15 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: '80%',
+  },
+  buttons:{
+    position: 'absolute', 
+    bottom: 5, 
+    right: 5, 
+  },
+  messageButton: {
+    backgroundColor: '#009999',
+    transform: [{ scaleX: -1}]
   },
   floatingBtn: {
     position: 'absolute', 
