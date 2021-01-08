@@ -16,7 +16,7 @@ export type renderItemProps = {
 }
 
 export default function ChatScreen() {
-
+  const navigation = useNavigation();
   const renderReadTicks = () => (
     <Ionicons name='checkmark-done' size={20} color='#25B1E4' />
   )
@@ -28,8 +28,12 @@ export default function ChatScreen() {
   )
 
   const renderItem = ({item}:renderItemProps) => {
+    
     return(
-      <TouchableOpacity style={{ flexDirection: 'row', marginHorizontal: 20,height: 70, justifyContent: 'center', alignItems: 'center' }}>
+      <TouchableOpacity 
+      onPress={() => navigation.navigate('Messages', { imageUri: item.imageUri, name: item.name}) }
+      style={{ flexDirection: 'row', marginHorizontal: 20,height: 70, justifyContent: 'center', alignItems: 'center' }}
+      >
         <Image 
           source={{ uri: item.imageUri}}
           style={{
@@ -60,8 +64,6 @@ export default function ChatScreen() {
       </TouchableOpacity>
     )
   }
-
-  const navigation = useNavigation();
 
   function onPress() {
   }
