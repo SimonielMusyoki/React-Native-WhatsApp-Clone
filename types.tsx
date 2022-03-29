@@ -17,3 +17,21 @@ export type HomeScreenParamList = {
 export type TabTwoParamList = {
   TabTwoScreen: undefined;
 };
+
+export type unreadBubbleProps = {
+  messagesCount: number;
+};
+
+export type renderItemProps = {
+  item: {
+    id: string;
+    name: string;
+    lastSeen?: string;
+    status: string;
+    isMe: boolean;
+    isRead: boolean;
+    isDelivered: boolean;
+    unreadMessagesCount: number;
+    imageUri: string;
+  };
+};
